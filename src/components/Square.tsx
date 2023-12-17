@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 
-export default function CustomSquare() {
+export default function Square() {
     const imageInput = useRef<HTMLInputElement>(null);
     const imagePreview = useRef<HTMLImageElement>(null);
 
