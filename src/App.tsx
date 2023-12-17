@@ -7,7 +7,7 @@ function App() {
   const currentYear = (new Date()).getFullYear();
   const frame = useRef<HTMLElement>(null);
 
-  function saveImage(e) {
+  function saveImage(e: React.MouseEvent) {
     e.preventDefault();
     html2canvas(frame.current!).then((canvas) => {
       const downloadImageLink = document.createElement("a");

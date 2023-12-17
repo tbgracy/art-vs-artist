@@ -23,17 +23,17 @@ export default function Square() {
         setImagePresent(true);
     }
 
-    function startMovement(e) {
+    function startMovement(e: React.MouseEvent) {
         e.preventDefault();
         setMouseIsDown(true);
     }
 
-    function endMovement(e) {
+    function endMovement(e: React.MouseEvent) {
         e.preventDefault();
         setMouseIsDown(false);
     }
 
-    function moveImage(e) {
+    function moveImage(e: React.MouseEvent) {
         e.preventDefault();
 
         if (mouseIsDown) {
@@ -46,7 +46,7 @@ export default function Square() {
         }
     }
 
-    function zoomImage(e) {
+    function zoomImage(e: React.WheelEvent) {
         const dY = e.deltaY;
 
         if (dY < 0) {
