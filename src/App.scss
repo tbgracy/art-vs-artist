@@ -1,4 +1,9 @@
 $side: 25vh;
+$accent-color: #e282ce;
+
+footer {
+  text-align: center;
+}
 
 main {
   display: flex;
@@ -6,9 +11,14 @@ main {
   align-items: center;
   gap: 1rem;
   justify-content: center;
-  height: 100vh;
+  height: 95vh;
   padding-bottom: 1rem;
   box-sizing: border-box;
+
+  .hashtag:hover {
+    color: $accent-color;
+    cursor: pointer;
+  }
 
   h3 {
     margin: 0;
@@ -19,18 +29,21 @@ main {
     height: $side * 3;
     display: flex;
     flex-wrap: wrap;
-
-
+    box-shadow: 0 0 1px black; 
+    
     .square {
-      box-shadow: 0 0 2px black inset;
+      box-shadow: 0 0 1px black inset; 
       // position: absolute;
       width: $side;
       aspect-ratio: 1;
       overflow: hidden;
 
       &:hover {
-        input {
-          display: block;
+        label {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: .2rem;
         }
       }
 
@@ -41,57 +54,22 @@ main {
         width: 100%;
       }
 
-      input {
+      input[type='file'] {
+        display: none;
+      }
+
+      label {
         display: none;
         cursor: pointer;
         z-index: 20;
         position: absolute;
+        margin: .5rem;
+
+        background-color: $accent-color;
+        color: white;
+        border-radius: 8px;
+        padding: .5rem;
       }
-
-      // &:nth-of-type(1) {
-      //   left: 0;
-      //   top: 0;
-      // }
-
-      // &:nth-of-type(2) {
-      //   left: $side;
-      //   top: 0;
-      // }
-
-      // &:nth-of-type(3) {
-      //   left: $side * 2;
-      //   top: 0;
-      // }
-
-      // &:nth-of-type(4) {
-      //   top: $side;
-      //   left: 0;
-      // }
-
-      // &:nth-of-type(5) {
-      //   top: $side;
-      //   left: $side;
-      // }
-
-      // &:nth-of-type(6) {
-      //   top: $side;
-      //   left: $side * 2;
-      // }
-
-      // &:nth-of-type(7) {
-      //   top: $side * 2;
-      //   left: 0;
-      // }
-
-      // &:nth-of-type(8) {
-      //   top: $side * 2;
-      //   left: $side;
-      // }
-
-      // &:nth-of-type(9) {
-      //   top: $side * 2;
-      //   left: $side * 2;
-      // }
     }
   }
 }

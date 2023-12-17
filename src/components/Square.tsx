@@ -1,4 +1,6 @@
-import { useRef, useState } from "react"
+import { useRef, useState } from "react";
+import { MdAddAPhoto, MdChangeCircle } from "react-icons/md";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Square() {
     const imageInput = useRef<HTMLInputElement>(null);
@@ -7,15 +9,18 @@ export default function Square() {
     const minZoom = 1;
     const maxZoom = 10;
 
+    const id = uuidv4();
+
     const [scale, setScale] = useState(1);
-    const [translation, setTranslation] = useState({ x: 0, y: 0 });
+    const [imagePresent, setImagePresent] = useState(false);
     const [mouseIsDown, setMouseIsDown] = useState(false);
+    const [translation, setTranslation] = useState({ x: 0, y: 0 });
 
     function showImage() {
         const file = imageInput.current!.files;
         if (file && file.length > 0)
             imagePreview.current!.src = URL.createObjectURL(file[0]);
-
+        setImagePresent(true);
     }
 
     function startMovement(e) {
@@ -35,7 +40,7 @@ export default function Square() {
             const newX = translation.x + e.movementX;
             const newY = translation.y + e.movementY;
             if (newX)
-            setTranslation({ x: newX, y: newY })
+                setTranslation({ x: newX, y: newY })
             const scaleValue = imagePreview.current!.style.scale;
             imagePreview.current!.setAttribute('style', `scale: ${scaleValue}; translate: ${translation.x}px ${translation.y}px`)
         }
@@ -56,7 +61,8 @@ export default function Square() {
     }
 
     return <article className="square">
-        <input ref={imageInput} type="file" name="image" id="image" accept="image/*" onChange={showImage} />
+        <label htmlFor={id}> {imagePresent ? <MdChangeCircle /> : <MdAddAPhoto />}</label>
+        <input ref={imageInput} type="file" name="image" id={id} accept="image/*" onChange={showImage} />
         <img ref={imagePreview} src="" alt=""
             onWheel={zoomImage}
             onMouseDown={startMovement}
