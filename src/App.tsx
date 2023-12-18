@@ -21,7 +21,7 @@ function App() {
 
   return <>
     <main>
-      <h3><span className="hashtag">#artvsartist{currentYear}</span> Generator</h3>
+      <h3><a className="hashtag" href='https://www.instagram.com/explore/tags/artvsartist' target='_blank'>#artvsartist{currentYear}</a> Generator</h3>
       <SquaresContainer ref={frame} />
       <button onClick={saveImage}>Download your #artvsartist{currentYear}</button>
     </main>
