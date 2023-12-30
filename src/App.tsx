@@ -24,6 +24,7 @@ function App() {
       <h3><span className="hashtag">#artvsartist{currentYear}</span> Generator</h3>
       <SquaresContainer ref={frame} />
       <button onClick={saveImage}>Download your #artvsartist{currentYear}</button>
+      <a href="https://youtu.be/UhW0ufMM3Pk" target='_blank'>How to use</a>
     </main>
     <footer>
       &copy; {currentYear} - Made with 🧠 by <a href="https://github.com/tbgracy" target='_blank'>@tbgracy</a> aka <a href="https://www.instagram.com/graa.uus/" target='_blank'>@graa.uus</a>
