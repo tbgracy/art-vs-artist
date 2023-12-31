@@ -1,20 +1,19 @@
 import { useRef, useState } from "react";
+
 import { MdAddAPhoto, MdChangeCircle } from "react-icons/md";
 import { v4 as uuidv4 } from 'uuid';
 
+import useCropper from "./hooks";
+
 export default function Square() {
+    const id = uuidv4();
+
     const imageInput = useRef<HTMLInputElement>(null);
     const imagePreview = useRef<HTMLImageElement>(null);
 
-    const minZoom = 1;
-    const maxZoom = 10;
+    const { startMovement, endMovement, moveImage, zoomImage } = useCropper(imagePreview.current!);
 
-    const id = uuidv4();
-
-    const [scale, setScale] = useState(1);
     const [imagePresent, setImagePresent] = useState(false);
-    const [mouseIsDown, setMouseIsDown] = useState(false);
-    const [translation, setTranslation] = useState({ x: 0, y: 0 });
 
     function showImage() {
         const file = imageInput.current!.files;
@@ -23,47 +22,10 @@ export default function Square() {
         setImagePresent(true);
     }
 
-    function startMovement(e: React.MouseEvent) {
-        e.preventDefault();
-        setMouseIsDown(true);
-    }
-
-    function endMovement(e: React.MouseEvent) {
-        e.preventDefault();
-        setMouseIsDown(false);
-    }
-
-    function moveImage(e: React.MouseEvent) {
-        e.preventDefault();
-
-        if (mouseIsDown) {
-            const newX = translation.x + e.movementX;
-            const newY = translation.y + e.movementY;
-            if (newX)
-                setTranslation({ x: newX, y: newY })
-            const scaleValue = imagePreview.current!.style.scale;
-            imagePreview.current!.setAttribute('style', `scale: ${scaleValue}; translate: ${translation.x}px ${translation.y}px`)
-        }
-    }
-
-    function zoomImage(e: React.WheelEvent) {
-        const dY = e.deltaY;
-
-        if (dY < 0) {
-            if (scale + .1 < maxZoom)
-                setScale(scale + .1)
-        } else {
-            if (scale - .1 > minZoom)
-                setScale(scale - .1)
-        }
-        const translationValue = imagePreview.current!.style.translate;
-        imagePreview.current!.setAttribute('style', `scale: ${scale}; translate: ${translationValue}`)
-    }
-
     return <article className="square">
         <label htmlFor={id}> {imagePresent ? <MdChangeCircle /> : <MdAddAPhoto />}</label>
         <input ref={imageInput} type="file" name="image" id={id} accept="image/*" onChange={showImage} />
-        <img ref={imagePreview} src="" alt=""
+        <img ref={imagePreview} alt="one of the nine challenge images" className={imagePresent ? '' : 'hide'}
             onWheel={zoomImage}
             onMouseDown={startMovement}
             onMouseUp={endMovement}

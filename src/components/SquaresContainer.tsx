@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+
 import Square from "./Square";
 
 const SquaresContainer = forwardRef<HTMLElement>((_, ref) => {
