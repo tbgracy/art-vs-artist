@@ -5,6 +5,7 @@ The Art vs Artist Generator is a React application that allows users to create s
 You can watch a demo of how to use it [there](https://youtu.be/UhW0ufMM3Pk).
 
 ## Roadmap
+- [ ] SEO
 - [ ] Add help section
 - [ ] Add reset button
 - [ ] Add language switch
