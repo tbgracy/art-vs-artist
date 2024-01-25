@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useCropper(imagePreview: HTMLImageElement) {
+export default function useCropper(imagePreviewElement: HTMLImageElement) {
     const minZoom = 1;
     const maxZoom = 10;
 
@@ -26,8 +26,8 @@ export default function useCropper(imagePreview: HTMLImageElement) {
             const newY = translation.y + e.movementY;
             if (newX)
                 setTranslation({ x: newX, y: newY })
-            const scaleValue = imagePreview.style.scale;
-            imagePreview.setAttribute('style', `scale: ${scaleValue}; translate: ${translation.x}px ${translation.y}px`)
+            const scaleValue = imagePreviewElement.style.scale;
+            imagePreviewElement.setAttribute('style', `scale: ${scaleValue}; translate: ${translation.x}px ${translation.y}px`)
         }
     }
 
@@ -41,8 +41,8 @@ export default function useCropper(imagePreview: HTMLImageElement) {
             if (scale - .1 > minZoom)
                 setScale(scale - .1)
         }
-        const translationValue = imagePreview.style.translate;
-        imagePreview.setAttribute('style', `scale: ${scale}; translate: ${translationValue}`)
+        const translationValue = imagePreviewElement.style.translate;
+        imagePreviewElement.setAttribute('style', `scale: ${scale}; translate: ${translationValue}`)
     }
 
     return {startMovement, endMovement, moveImage, zoomImage};
